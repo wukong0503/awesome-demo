@@ -1,29 +1,35 @@
-package com.lzming.demo.netty;
+package com.lzming.demo.netty.protocol;
 
+import com.lzming.demo.netty.serialize.JSONSerializer;
+import com.lzming.demo.netty.serialize.Serializer;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.lzming.demo.netty.Command.LOGIN_REQUEST;
+import static com.lzming.demo.netty.protocol.command.Command.LOGIN_REQUEST;
+import static com.lzming.demo.netty.protocol.command.Command.LOGIN_RESPONSE;
 
 public class PacketCodeC {
     private static final int MAGIC_NUMBER = 0x12345678;
+    public static final PacketCodeC INSTANCE = new PacketCodeC();
+
     private static final Map<Byte, Class<? extends Packet>> packetTypeMap;
     private static final Map<Byte, Serializer> serializerMap;
 
     static {
         packetTypeMap = new HashMap<>();
         packetTypeMap.put(LOGIN_REQUEST, LoginRequestPacket.class);
+        packetTypeMap.put(LOGIN_RESPONSE, LoginResponsePacket.class);
 
         serializerMap = new HashMap<>();
         Serializer serializer = new JSONSerializer();
         serializerMap.put(serializer.getSerializerAlgorithm(), serializer);
     }
 
-    public ByteBuf encode(Packet packet) {
-        ByteBuf byteBuf = ByteBufAllocator.DEFAULT.ioBuffer();
+    public ByteBuf encode(ByteBufAllocator byteBufAllocator, Packet packet) {
+        ByteBuf byteBuf = byteBufAllocator.ioBuffer();
 
         byte[] bytes = Serializer.DEFAULT.serialize(packet);
 
@@ -35,6 +41,11 @@ public class PacketCodeC {
         byteBuf.writeBytes(bytes);
 
         return byteBuf;
+
+    }
+
+    public ByteBuf encode(Packet packet) {
+        return encode(ByteBufAllocator.DEFAULT, packet);
     }
 
     public Packet decode(ByteBuf byteBuf) {

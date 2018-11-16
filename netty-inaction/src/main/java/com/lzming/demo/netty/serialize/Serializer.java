@@ -1,4 +1,4 @@
-package com.lzming.demo.netty;
+package com.lzming.demo.netty.serialize;
 
 public interface Serializer {
     byte JSON_SERIALIZER = 1;

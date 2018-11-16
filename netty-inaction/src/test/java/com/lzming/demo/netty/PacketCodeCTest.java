@@ -1,5 +1,10 @@
 package com.lzming.demo.netty;
 
+import com.lzming.demo.netty.protocol.LoginRequestPacket;
+import com.lzming.demo.netty.protocol.Packet;
+import com.lzming.demo.netty.protocol.PacketCodeC;
+import com.lzming.demo.netty.serialize.JSONSerializer;
+import com.lzming.demo.netty.serialize.Serializer;
 import io.netty.buffer.ByteBuf;
 import org.junit.Assert;
 import org.junit.Test;

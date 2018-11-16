@@ -1,4 +1,4 @@
-package com.lzming.demo.netty;
+package com.lzming.demo.netty.serialize;
 
 import com.alibaba.fastjson.JSON;
 

@@ -1,8 +1,8 @@
-package com.lzming.demo.netty;
+package com.lzming.demo.netty.protocol;
 
 import lombok.Data;
 
-import static com.lzming.demo.netty.Command.LOGIN_REQUEST;
+import static com.lzming.demo.netty.protocol.command.Command.LOGIN_REQUEST;
 
 @Data
 public class LoginRequestPacket extends Packet {
