@@ -4,6 +4,7 @@ import com.lzming.demo.netty.protocol.LoginRequestPacket;
 import com.lzming.demo.netty.protocol.LoginResponsePacket;
 import com.lzming.demo.netty.protocol.Packet;
 import com.lzming.demo.netty.protocol.PacketCodeC;
+import com.lzming.demo.netty.util.LoginUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -36,6 +37,8 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
             LoginResponsePacket responsePacket = (LoginResponsePacket) packet;
             if (responsePacket.isSuccess()) {
                 System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date()) + ": 客户端登录成功");
+                LoginUtil.markAsLogin(ctx.channel());
+
             } else {
                 System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date())
                         + ": 客户端登录失败，原因：" + responsePacket.getReason());
