@@ -8,8 +8,7 @@ import io.netty.buffer.ByteBufAllocator;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.lzming.demo.netty.protocol.command.Command.LOGIN_REQUEST;
-import static com.lzming.demo.netty.protocol.command.Command.LOGIN_RESPONSE;
+import static com.lzming.demo.netty.protocol.command.Command.*;
 
 public class PacketCodeC {
     private static final int MAGIC_NUMBER = 0x12345678;
@@ -22,6 +21,8 @@ public class PacketCodeC {
         packetTypeMap = new HashMap<>();
         packetTypeMap.put(LOGIN_REQUEST, LoginRequestPacket.class);
         packetTypeMap.put(LOGIN_RESPONSE, LoginResponsePacket.class);
+        packetTypeMap.put(MESSAGE_REQUEST, MessageRequestPacket.class);
+        packetTypeMap.put(MESSAGE_RESPONSE, MessageResponsePacket.class);
 
         serializerMap = new HashMap<>();
         Serializer serializer = new JSONSerializer();

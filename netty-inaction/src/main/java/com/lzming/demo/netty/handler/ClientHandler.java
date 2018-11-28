@@ -1,9 +1,6 @@
 package com.lzming.demo.netty.handler;
 
-import com.lzming.demo.netty.protocol.LoginRequestPacket;
-import com.lzming.demo.netty.protocol.LoginResponsePacket;
-import com.lzming.demo.netty.protocol.Packet;
-import com.lzming.demo.netty.protocol.PacketCodeC;
+import com.lzming.demo.netty.protocol.*;
 import com.lzming.demo.netty.util.LoginUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -43,6 +40,9 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
                 System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date())
                         + ": 客户端登录失败，原因：" + responsePacket.getReason());
             }
+        } else if (packet instanceof MessageResponsePacket) {
+            MessageResponsePacket messageResponsePacket = (MessageResponsePacket) packet;
+            System.out.println(new Date() + ": 收到服务端的消息: " + messageResponsePacket.getMessage());
         }
     }
 }
