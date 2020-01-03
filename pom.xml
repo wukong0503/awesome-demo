@@ -51,7 +51,7 @@
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-all</artifactId>
-			<version>4.1.30.Final</version>
+			<version>4.1.42.Final</version>
             <!--1、test范围指的是测试范围有效，在编译和打包时都不会使用这个依赖-->
             <!--2、compile范围指的是编译范围有效，在编译和打包时都会将依赖存储进去 默认-->
             <!--3、provided依赖：在编译和测试的过程有效，最后生成war包时不会加入，诸如：servlet-api，因为servlet-api，tomcat等web服务器已经存在了，如果再打包会冲突 -->
